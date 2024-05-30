@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>User Registration Form</h2>
+    <form action="/insertData" method="post">
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" name="userId" required><br><br>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="mobile">Mobile:</label>
+        <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Password</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% user.map((val)=>{ %>
+
+                <tr>
+                    <td>
+                        <%= val.userId %>
+                    </td>
+                    <td>
+                        <%= val.name %>
+                    </td>
+                    <td>
+                        <%= val.email %>
+                    </td>
+                    <td>
+                        <%= val.mobile %>
+                    </td>
+                    <td>
+                        <%= val.password %>
+                    </td>
+                    <td>
+                        <a href="/editData?userId=<%= val.userId %>">Edit</a>
+                        <a href="/deleteData?userId=<%= val.userId %>">Delete</a>
+                    </td>
+                </tr>
+
+                <% }) %>
+        </tbody>
+    </table>
+
+</body>
+
+</html>
