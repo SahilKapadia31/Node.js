@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar styles */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-black text-white">
+    <!-- Sidebar -->
+    <aside class="fixed top-0 left-0 h-full w-64 bg-black bg-opacity-75 p-4">
+        <div class="flex items-center space-x-4 mb-8">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo"
+                class="w-24">
+        </div>
+        <nav>
+            <ul class="space-y-4">
+                <li><a href="#" class="hover:text-gray-300 block">Home</a></li>
+                <li><a href="#" class="hover:text-gray-300 block">TV Shows</a></li>
+                <li><a href="#" class="hover:text-gray-300 block">Movies</a></li>
+                <li><a href="#" class="hover:text-gray-300 block">Latest</a></li>
+                <li><a href="#" class="hover:text-gray-300 block">My List</a></li>
+            </ul>
+        </nav>
+        <div class="mt-auto space-y-4">
+            <a href="#" class="hover:text-gray-300 block">Search</a>
+            <a href="#" class="hover:text-gray-300 block">Kids</a>
+            <a href="#" class="hover:text-gray-300 block">DVD</a>
+            <a href="#" class="hover:text-gray-300 block">Notifications</a>
+            <div class="flex items-center space-x-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="User Avatar"
+                    class="w-8 h-8 rounded">
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="ml-64">
+        <!-- Hero Section -->
+        <section class="relative h-screen bg-cover bg-center"
+            style="background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/50ae4b1c-9a93-4ecb-b2d1-14f7b6af48f1/42da40f3-cb5a-49ae-8b6b-d3bc7d4c50b2/US-en-20210510-popsignuptwoweeks-perspective_alpha_website_small.jpg');">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+            <div class="absolute bottom-0 p-8 space-y-4">
+                <h1 class="text-6xl font-bold">Movie Title</h1>
+                <p class="max-w-xl">A brief description of the movie or TV show goes here. It gives viewers a taste of
+                    what to expect.</p>
+                <div class="space-x-2">
+                    <button class="px-4 py-2 bg-white text-black font-semibold rounded">Play</button>
+                    <button class="px-4 py-2 bg-gray-700 bg-opacity-50 text-white font-semibold rounded">More
+                        Info</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Movie Grid -->
+        <section class="p-8">
+            <h2 class="text-2xl font-semibold mb-4">Popular on Netflix</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Example movie item -->
+                <div class="relative">
+                    <img src="https://via.placeholder.com/300x450" alt="Movie" class="w-full h-auto">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                        <button class="px-4 py-2 bg-white text-black font-semibold rounded">Play</button>
+                    </div>
+                </div>
+                <!-- Repeat movie item for more movies -->
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
