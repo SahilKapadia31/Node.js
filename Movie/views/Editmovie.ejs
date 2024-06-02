@@ -30,7 +30,7 @@
     <div class="row justify-content-center  mt-5">
         <div class="col-4">
             <h2 class="text-center"></h2>
-            <form action="/updateMovie" method="post">
+            <form action="/updateMovie" method="post" enctype="multipart/form-data">
 
                 <label for="name">Movie Name:</label>
                 <input type="text" class="form-control " id="movie_name" name="movie_name"
@@ -42,7 +42,7 @@
                 <br>
 
                 <label for="image">Poster:</label>
-                <input type="text" class="form-control" id="image" name="image" value="<%= data.image %>" required><br>
+                <input type="file" class="form-control" id="image" name="image" value="<%= data.image %>" required><br>
 
                 <label for="rating">Choose rating:</label>
                 <select class="form-select" aria-label="Default select example" name="movie_ratings" id="movie_ratings">

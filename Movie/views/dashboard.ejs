@@ -51,7 +51,8 @@
     <main class="ml-64">
         <!-- Hero Section -->
         <% moviesData.map((movie)=>{ %>
-            <section class="relative h-screen bg-cover bg-center" style="background-image: url('<%= movie.image %>');">
+            <section class="relative h-screen bg-cover bg-center">
+                <img src="<%= movie.image %>" class="w-full h-full" alt="">
                 <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                 <div class="absolute bottom-0 p-8 space-y-4">
                     <h1 class="text-6xl font-bold">

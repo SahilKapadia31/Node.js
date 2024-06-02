@@ -1,5 +1,6 @@
 const multer = require('multer');
 const movie = require('../models/movie.schema')
+const fs = require('fs')
 
 // const storage = multer.diskStorage({
 //     destination: (req, file, cb) => {
@@ -17,6 +18,7 @@ let movieId;
 const home = async (req, res) => {
     try {
         const data = await movie.find();
+        console.log(data)
         return res.render("dashboard", { moviesData: data })
     } catch (error) {
         console.log(error)
@@ -24,9 +26,9 @@ const home = async (req, res) => {
 }
 
 const addMovie = async (req, res) => {
+    let image = req.file.path
     try {
-        let data = await movie.create(req.body);
-        console.log(data);
+        let data = await movie.create({ ...req.body, image });
         return res.redirect("/");
     } catch (error) {
         console.log(error);
@@ -38,8 +40,9 @@ const add_movie = async (req, res) => {
 }
 
 const updateMovie = async (req, res) => {
+    let image = req.file.path
     try {
-        let data = await movie.findOneAndUpdate(movieId, req.body);
+        let data = await movie.findOneAndUpdate(movieId, { ...req.body, image });
         return res.redirect("/");
     } catch (error) {
         console.log(error);
@@ -60,8 +63,12 @@ const edit_movie = async (req, res) => {
 const deleteMovie = async (req, res) => {
     let { id } = req.params;
     try {
-        let data = await movie.findOneAndDelete(id);
-        return res.redirect("/");
+        let data = await movie.findOneAndDelete(id).then((singleRecode) => {
+            fs.unlinkSync(singleRecode.image)
+            return res.redirect("/");
+        }).catch((err) => {
+            console.log(err);
+        })
     } catch (error) {
         console.log(error);
     }
