@@ -30,7 +30,7 @@
             <ul class="space-y-4">
                 <li><a href="#" class="hover:text-gray-300 block">Home</a></li>
                 <li><a href="#" class="hover:text-gray-300 block">TV Shows</a></li>
-                <li><a href="#" class="hover:text-gray-300 block">Movies</a></li>
+                <li><a href="/add_movie" class="hover:text-gray-300 block">Movies</a></li>
                 <li><a href="#" class="hover:text-gray-300 block">Latest</a></li>
                 <li><a href="#" class="hover:text-gray-300 block">My List</a></li>
             </ul>
@@ -50,36 +50,55 @@
     <!-- Main Content -->
     <main class="ml-64">
         <!-- Hero Section -->
-        <section class="relative h-screen bg-cover bg-center"
-            style="background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/50ae4b1c-9a93-4ecb-b2d1-14f7b6af48f1/42da40f3-cb5a-49ae-8b6b-d3bc7d4c50b2/US-en-20210510-popsignuptwoweeks-perspective_alpha_website_small.jpg');">
-            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-            <div class="absolute bottom-0 p-8 space-y-4">
-                <h1 class="text-6xl font-bold">Movie Title</h1>
-                <p class="max-w-xl">A brief description of the movie or TV show goes here. It gives viewers a taste of
-                    what to expect.</p>
-                <div class="space-x-2">
-                    <button class="px-4 py-2 bg-white text-black font-semibold rounded">Play</button>
-                    <button class="px-4 py-2 bg-gray-700 bg-opacity-50 text-white font-semibold rounded">More
-                        Info</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Movie Grid -->
-        <section class="p-8">
-            <h2 class="text-2xl font-semibold mb-4">Popular on Netflix</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                <!-- Example movie item -->
-                <div class="relative">
-                    <img src="https://via.placeholder.com/300x450" alt="Movie" class="w-full h-auto">
-                    <div
-                        class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+        <% moviesData.map((movie)=>{ %>
+            <section class="relative h-screen bg-cover bg-center" style="background-image: url('<%= movie.image %>');">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 p-8 space-y-4">
+                    <h1 class="text-6xl font-bold">
+                        <%= movie.movie_name %>
+                    </h1>
+                    <p class="max-w-xl">
+                        <%= movie.movie_disc %>
+                    </p>
+                    <div class="space-x-2">
                         <button class="px-4 py-2 bg-white text-black font-semibold rounded">Play</button>
+                        <button class="px-4 py-2 bg-gray-700 bg-opacity-50 text-white font-semibold rounded">More
+                            Info</button>
                     </div>
                 </div>
-                <!-- Repeat movie item for more movies -->
-            </div>
-        </section>
+            </section>
+            <% }) %>
+
+                <!-- Movie Grid -->
+                <section class="p-8">
+                    <h2 class="text-2xl font-semibold mb-4">Popular on Netflix</h2>
+                    <% moviesData.map((movie)=>{ %>
+                        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                            <!-- Example movie item -->
+                            <div class="relative">
+                                <img src="<%= movie.image %>" alt="Movie" class="w-full h-auto">
+                                <div class="">
+                                    <h1 class="font-semibold">
+                                        <%= movie.movie_name %>
+                                            <br>
+                                            <%= movie.movie_ratings %>
+                                    </h1>
+                                    <p class="truncate ">
+                                        <%= movie.movie_disc %>
+                                    </p>
+                                </div>
+                                <div
+                                    class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                                    <a href="/update_Movie?id=<%= movie._id %>"
+                                        class="px-4 py-2 bg-amber-200 text-black me-2 font-semibold rounded">Edit</a>
+                                    <a href="/deleteMovie?id=<%= movie._id %>"
+                                        class="px-4 py-2 bg-red-800 text-black font-semibold rounded">Delete</a>
+                                </div>
+                            </div>
+                            <!-- Repeat movie item for more movies -->
+                        </div>
+                        <% }) %>
+                </section>
     </main>
 </body>
 
