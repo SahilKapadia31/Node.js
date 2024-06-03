@@ -42,7 +42,7 @@ const add_movie = async (req, res) => {
 const updateMovie = async (req, res) => {
     let image = req.file.path
     try {
-        let data = await movie.findOneAndUpdate(movieId, { ...req.body, image }).then((singleRecode) => {
+        let data = await movie.findByIdAndUpdate(movieId, { ...req.body, image }).then((singleRecode) => {
             fs.unlinkSync(singleRecode.image)
             return res.redirect("/");
         }).catch((err) => {
@@ -54,10 +54,10 @@ const updateMovie = async (req, res) => {
 }
 
 const edit_movie = async (req, res) => {
-    let { id } = req.params;
+    let { id } = req.query;
     movieId = id
     try {
-        const data = await movie.findOne(id);
+        const data = await movie.findById(id);
         return res.render("Editmovie", { data })
     } catch (error) {
         console.log(error)
@@ -65,9 +65,9 @@ const edit_movie = async (req, res) => {
 }
 
 const deleteMovie = async (req, res) => {
-    let { id } = req.params;
+    let { id } = req.query;
     try {
-        let data = await movie.findOneAndDelete(id).then((singleRecode) => {
+        let data = await movie.findByIdAndDelete(id).then((singleRecode) => {
             fs.unlinkSync(singleRecode.image)
             return res.redirect("/");
         }).catch((err) => {

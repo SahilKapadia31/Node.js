@@ -66,8 +66,8 @@
             <div class="swiper-wrapper">
                 <% moviesData.map((movie)=>{ %>
                     <div class="swiper-slide">
-                        <section class="relative h-screen bg-cover bg-center">
-                            <img src="<%= movie.image %>" class="w-full h-full" alt="">
+                        <section class="relative h-screen bg-cover bg-center w-full" style="height: 80dvh;">
+                            <img src="<%= movie.image %>" class="w-full h-full" hr alt="">
                             <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent">
                             </div>
                             <div class="absolute bottom-0 p-8 space-y-4">
