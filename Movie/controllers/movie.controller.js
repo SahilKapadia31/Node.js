@@ -2,16 +2,16 @@ const multer = require('multer');
 const movie = require('../models/movie.schema')
 const fs = require('fs')
 
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, "/public/img")
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null, file.originalname)
-//     }
-// })
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "./uploads/img")
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
+    }
+})
 
-// const uploadImg = multer({ storage: storage }).single("image")
+const uploadImg = multer({ storage: storage }).single("image")
 
 let movieId;
 
@@ -74,4 +74,4 @@ const deleteMovie = async (req, res) => {
     }
 }
 
-module.exports = { home, addMovie, updateMovie, deleteMovie, add_movie, edit_movie }
+module.exports = { home, addMovie, updateMovie, deleteMovie, add_movie, edit_movie, uploadImg }

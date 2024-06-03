@@ -6,15 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        /* Custom scrollbar styles */
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
+        .swiper {
+            width: 100%;
+            height: 100%;
         }
 
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .swiper-slide {
+            /* text-align: center; */
+            font-size: 18px;
+            /* background: #fff; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -50,57 +62,91 @@
     <!-- Main Content -->
     <main class="ml-64">
         <!-- Hero Section -->
-        <% moviesData.map((movie)=>{ %>
-            <section class="relative h-screen bg-cover bg-center">
-                <img src="<%= movie.image %>" class="w-full h-full" alt="">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                <div class="absolute bottom-0 p-8 space-y-4">
-                    <h1 class="text-6xl font-bold">
-                        <%= movie.movie_name %>
-                    </h1>
-                    <p class="max-w-xl">
-                        <%= movie.movie_disc %>
-                    </p>
-                    <div class="space-x-2">
-                        <button class="px-4 py-2 bg-white text-black font-semibold rounded">Play</button>
-                        <button class="px-4 py-2 bg-gray-700 bg-opacity-50 text-white font-semibold rounded">More
-                            Info</button>
-                    </div>
-                </div>
-            </section>
-            <% }) %>
-
-                <!-- Movie Grid -->
-                <section class="p-8">
-                    <h2 class="text-2xl font-semibold mb-4">Popular on Netflix</h2>
-                    <% moviesData.map((movie)=>{ %>
-                        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                            <!-- Example movie item -->
-                            <div class="relative">
-                                <img src="<%= movie.image %>" alt="Movie" class="w-full h-auto">
-                                <div class="">
-                                    <h1 class="font-semibold">
-                                        <%= movie.movie_name %>
-                                            <br>
-                                            <%= movie.movie_ratings %>
-                                    </h1>
-                                    <p class="truncate ">
-                                        <%= movie.movie_disc %>
-                                    </p>
-                                </div>
-                                <div
-                                    class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                                    <a href="/update_Movie?id=<%= movie._id %>"
-                                        class="px-4 py-2 bg-amber-200 text-black me-2 font-semibold rounded">Edit</a>
-                                    <a href="/deleteMovie?id=<%= movie._id %>"
-                                        class="px-4 py-2 bg-red-800 text-black font-semibold rounded">Delete</a>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <% moviesData.map((movie)=>{ %>
+                    <div class="swiper-slide">
+                        <section class="relative h-screen bg-cover bg-center">
+                            <img src="<%= movie.image %>" class="w-full h-full" alt="">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent">
+                            </div>
+                            <div class="absolute bottom-0 p-8 space-y-4">
+                                <h1 class="text-6xl font-bold">
+                                    <%= movie.movie_name %>
+                                </h1>
+                                <p class="max-w-xl">
+                                    <%= movie.movie_disc %>
+                                </p>
+                                <div class="space-x-2">
+                                    <button class="px-4 py-2 bg-white text-black font-semibold rounded">Play</button>
+                                    <button
+                                        class="px-4 py-2 bg-gray-700 bg-opacity-50 text-white font-semibold rounded">More
+                                        Info</button>
                                 </div>
                             </div>
-                            <!-- Repeat movie item for more movies -->
+                        </section>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+
+        <!-- Movie Grid -->
+        <section class="p-8">
+            <h2 class="text-2xl font-semibold mb-4">Popular on Netflix</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <% moviesData.map((movie)=>{ %>
+                    <!-- Example movie item -->
+                    <div class="relative">
+                        <img src="<%= movie.image %>" alt="Movie" class="w-full h-auto">
+                        <div class="">
+                            <h1 class="font-semibold">
+                                <%= movie.movie_name %>
+                                    <br>
+                                    <%= movie.movie_ratings %>
+                            </h1>
+                            <p class="truncate ">
+                                <%= movie.movie_disc %>
+                            </p>
                         </div>
-                        <% }) %>
-                </section>
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                            <a href="/update_Movie?id=<%= movie._id %>"
+                                class="px-4 py-2 bg-amber-200 text-black me-2 font-semibold rounded">Edit</a>
+                            <a href="/deleteMovie?id=<%= movie._id %>"
+                                class="px-4 py-2 bg-red-800 text-black font-semibold rounded">Delete</a>
+                        </div>
+                    </div>
+                    <!-- Repeat movie item for more movies -->
+                    <% }) %>
+            </div>
+        </section>
     </main>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            loop: true,
+            autoplay: {
+                delay: 1500,
+                disableOnInteraction: false
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    </script>
+
 </body>
+
 
 </html>
