@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const { home, addMovie, updateMovie, deleteMovie, add_movie, edit_movie, uploadImg } = require('../controllers/movie.controller');
-const multer = require('multer');
 
 const router = Router();
 

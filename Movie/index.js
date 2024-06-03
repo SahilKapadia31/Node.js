@@ -1,6 +1,5 @@
 const express = require('express')
 const path = require('path');
-const fs = require('fs')
 const db = require('./config/Database');
 const router = require('./routers/movies.router');
 
