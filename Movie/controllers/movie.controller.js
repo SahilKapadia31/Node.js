@@ -40,17 +40,30 @@ const add_movie = async (req, res) => {
 }
 
 const updateMovie = async (req, res) => {
-    let image = req.file.path
-    try {
-        let data = await movie.findByIdAndUpdate(movieId, { ...req.body, image }).then((singleRecode) => {
+    if (req.file) {
+        let image = req.file.path
+        movie.findById(movieId).then((singleRecode) => {
             fs.unlinkSync(singleRecode.image)
-            return res.redirect("/");
         }).catch((err) => {
             console.log(err);
         })
-    } catch (error) {
-        console.log(error);
+        try {
+            let data = await movie.findByIdAndUpdate(movieId, { ...req.body, image })
+            return res.redirect("/");
+        } catch (error) {
+            console.log(error);
+        }
+    } else {
+        let result = movie.findById(movieId)
+        let image = result.image
+        try {
+            let data = await movie.findByIdAndUpdate(movieId, { ...req.body, image })
+            return res.redirect("/");
+        } catch (error) {
+            console.log(error);
+        }
     }
+
 }
 
 const edit_movie = async (req, res) => {
