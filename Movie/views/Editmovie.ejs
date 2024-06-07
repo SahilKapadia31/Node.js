@@ -45,15 +45,24 @@
                 <input type="file" class="form-control" id="image" name="image" value="<%= data.image %>"><br>
 
                 <label for="rating">Choose rating:</label>
-                <select class="form-select" aria-label="Default select example" name="movie_ratings" id="movie_ratings">
+                <!-- <select class="form-select" aria-label="Default select example" name="movie_ratings" id="movie_ratings">
                     <option value="" <%=!data.movie_ratings ? 'selected' : '' %>>select stars</option>
                     <option value="⭐" <%=data.movie_ratings==='⭐' ? 'selected' : '' %>>⭐</option>
                     <option value="⭐⭐" <%=data.movie_ratings==='⭐⭐' ? 'selected' : '' %>>⭐⭐</option>
                     <option value="⭐⭐⭐" <%=data.movie_ratings==='⭐⭐⭐' ? 'selected' : '' %>>⭐⭐⭐</option>
                     <option value="⭐⭐⭐⭐" <%=data.movie_ratings==='⭐⭐⭐⭐' ? 'selected' : '' %>>⭐⭐⭐⭐</option>
                     <option value="⭐⭐⭐⭐⭐" <%=data.movie_ratings==='⭐⭐⭐⭐⭐' ? 'selected' : '' %>>⭐⭐⭐⭐⭐</option>
+                </select> -->
+                <select class="form-select" aria-label="Default select example" name="movie_ratings" id="movie_ratings">
+                    <option value="" <%=!data.movie_ratings ? 'selected' : '' %>>select stars</option>
+                    <% const maxStars=5; %>
+                        <% for (let i=1; i <=maxStars; i++) { %>
+                            <% const stars='⭐' .repeat(i); %>
+                                <option value="<%= stars %>" <%=data.movie_ratings===stars ? 'selected' : '' %>><%=
+                                        stars %>
+                                </option>
+                                <% } %>
                 </select>
-
                 <br>
 
                 <input type="submit" class="btn btn-primary " value="Submit">

@@ -41,23 +41,23 @@ const add_movie = async (req, res) => {
 
 const updateMovie = async (req, res) => {
     if (req.file) {
-        let image = req.file.path
         movie.findById(movieId).then((singleRecode) => {
             fs.unlinkSync(singleRecode.image)
         }).catch((err) => {
             console.log(err);
         })
+
+        let image = req.file.path
         try {
+
             let data = await movie.findByIdAndUpdate(movieId, { ...req.body, image })
             return res.redirect("/");
         } catch (error) {
             console.log(error);
         }
     } else {
-        let result = movie.findById(movieId)
-        let image = result.image
         try {
-            let data = await movie.findByIdAndUpdate(movieId, { ...req.body, image })
+            let data = await movie.findByIdAndUpdate(movieId, req.body)
             return res.redirect("/");
         } catch (error) {
             console.log(error);
